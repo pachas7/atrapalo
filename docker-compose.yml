@@ -1,0 +1,19 @@
+version: '3'
+ 
+services:
+  node:
+    build:
+      context:  ./node
+      dockerfile: Dockerfile
+    expose:
+        - "80"
+  proxy:
+    build:
+      context:  ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    links:
+      - node
+    depends_on:
+      - node
